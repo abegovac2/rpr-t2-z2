@@ -63,4 +63,21 @@ public class Interval {
         else if(pripadaLiDruga) return tacka > pocetnaTacka && tacka <= krajnjaTacka;
         return tacka > pocetnaTacka && tacka< krajnjaTacka;
     }
+
+    public Interval intersect(Interval interval){
+        if(interval.pocetnaTacka > krajnjaTacka || pocetnaTacka > interval.krajnjaTacka) return new Interval();
+        Double prvaTacka, drugaTacka;
+        boolean prvaU,drugaU;
+        prvaTacka = (interval.pocetnaTacka < pocetnaTacka ? pocetnaTacka : interval.pocetnaTacka);
+        prvaU = interval.pocetnaTacka.equals(pocetnaTacka) ;
+        drugaTacka = (interval.krajnjaTacka < krajnjaTacka ? interval.krajnjaTacka : pocetnaTacka);
+        drugaU = interval.krajnjaTacka.equals(krajnjaTacka) ;
+        return new Interval(prvaTacka,drugaTacka,prvaU,drugaU);
+    }
+
+    public static Interval intersect(Interval int_1, Interval int_2){
+        return int_1.intersect(int_2);
+    }
+
+
 }

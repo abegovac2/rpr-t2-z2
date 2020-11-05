@@ -55,4 +55,12 @@ public class Interval {
     public boolean isNull(){
         return  pocetnaTacka == 0 && krajnjaTacka == 0 && !pripadaLiPrva && !pripadaLiDruga;
     }
+
+    public boolean isIn(Double tacka){
+        if(pripadaLiPrva && pripadaLiDruga){
+            return tacka >= pocetnaTacka && tacka<= krajnjaTacka;
+        }else if(pripadaLiPrva) return tacka >= pocetnaTacka && tacka< krajnjaTacka;
+        else if(pripadaLiDruga) return tacka > pocetnaTacka && tacka <= krajnjaTacka;
+        return tacka > pocetnaTacka && tacka< krajnjaTacka;
+    }
 }

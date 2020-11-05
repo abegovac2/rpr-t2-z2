@@ -38,17 +38,21 @@ public class Interval {
         this.pripadaLiDruga = pripadaLiDruga;
     }
 
-    Interval(Double pocetnaTacka, Double krajnjaTacka, boolean pripadaLiPrva, boolean pripadaLiDruga){
+    public Interval(Double pocetnaTacka, Double krajnjaTacka, boolean pripadaLiPrva, boolean pripadaLiDruga){
         this.pocetnaTacka = pocetnaTacka;
         this.krajnjaTacka = krajnjaTacka;
         this.pripadaLiPrva = pripadaLiPrva;
         this.pripadaLiDruga = pripadaLiDruga;
     }
 
-    Interval(){
+    public Interval(){
         this.pocetnaTacka = 0.;
         this.krajnjaTacka = 0.;
         this.pripadaLiPrva = false;
         this.pripadaLiDruga = false;
+    }
+
+    public boolean isNull(){
+        return  pocetnaTacka == 0 && krajnjaTacka == 0 && !pripadaLiPrva && !pripadaLiDruga;
     }
 }

@@ -44,4 +44,11 @@ public class Interval {
         this.pripadaLiPrva = pripadaLiPrva;
         this.pripadaLiDruga = pripadaLiDruga;
     }
+
+    Interval(){
+        this.pocetnaTacka = 0.;
+        this.krajnjaTacka = 0.;
+        this.pripadaLiPrva = false;
+        this.pripadaLiDruga = false;
+    }
 }

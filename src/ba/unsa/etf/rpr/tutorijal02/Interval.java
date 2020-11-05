@@ -39,6 +39,7 @@ public class Interval {
     }
 
     public Interval(Double pocetnaTacka, Double krajnjaTacka, boolean pripadaLiPrva, boolean pripadaLiDruga){
+        if(pocetnaTacka > krajnjaTacka) throw new IllegalArgumentException();
         this.pocetnaTacka = pocetnaTacka;
         this.krajnjaTacka = krajnjaTacka;
         this.pripadaLiPrva = pripadaLiPrva;
@@ -65,13 +66,11 @@ public class Interval {
     }
 
     public Interval intersect(Interval interval){
-        if(interval.pocetnaTacka > krajnjaTacka || pocetnaTacka > interval.krajnjaTacka) return new Interval();
-        Double prvaTacka, drugaTacka;
-        boolean prvaU,drugaU;
-        prvaTacka = (interval.pocetnaTacka < pocetnaTacka ? pocetnaTacka : interval.pocetnaTacka);
-        prvaU = interval.pocetnaTacka.equals(pocetnaTacka) ;
-        drugaTacka = (interval.krajnjaTacka < krajnjaTacka ? interval.krajnjaTacka : pocetnaTacka);
-        drugaU = interval.krajnjaTacka.equals(krajnjaTacka) ;
+        if(krajnjaTacka < interval.pocetnaTacka || interval.krajnjaTacka < pocetnaTacka) return new Interval();
+        Double prvaTacka = Math.max(interval.pocetnaTacka,pocetnaTacka),
+                drugaTacka = Math.min(interval.krajnjaTacka,krajnjaTacka);
+        boolean prvaU = (prvaTacka.equals(pocetnaTacka) ? pripadaLiPrva : interval.pripadaLiPrva),
+                drugaU = (drugaTacka.equals(krajnjaTacka) ? pripadaLiDruga : interval.pripadaLiDruga);
         return new Interval(prvaTacka,drugaTacka,prvaU,drugaU);
     }
 
@@ -81,12 +80,8 @@ public class Interval {
 
     @Override
     public String toString() {
-        return "Interval{" +
-                "pocetnaTacka=" + pocetnaTacka +
-                ", krajnjaTacka=" + krajnjaTacka +
-                ", pripadaLiPrva=" + pripadaLiPrva +
-                ", pripadaLiDruga=" + pripadaLiDruga +
-                '}';
+        if(pocetnaTacka.equals(0.) && krajnjaTacka.equals(0.) && !pripadaLiPrva && !pripadaLiDruga) return "()";
+        return "" + (pripadaLiPrva ? "[" : "(") + pocetnaTacka +  "," + krajnjaTacka + (pripadaLiDruga ? "]" : ")");
     }
 
     @Override

@@ -79,5 +79,21 @@ public class Interval {
         return int_1.intersect(int_2);
     }
 
+    @Override
+    public String toString() {
+        return "Interval{" +
+                "pocetnaTacka=" + pocetnaTacka +
+                ", krajnjaTacka=" + krajnjaTacka +
+                ", pripadaLiPrva=" + pripadaLiPrva +
+                ", pripadaLiDruga=" + pripadaLiDruga +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Interval){
+            return ((Interval) o).pocetnaTacka.equals(pocetnaTacka) && ((Interval) o).krajnjaTacka.equals(krajnjaTacka)
+                    && ((Interval) o).pripadaLiPrva == pripadaLiPrva && ((Interval) o).pripadaLiDruga == pripadaLiDruga;
+        }else return false;
+    }
 }
